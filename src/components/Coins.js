@@ -5,7 +5,6 @@ import Ankh from './Ankh'
 import Feather from './Feather'
 import Draggable from "gsap/Draggable";
 
-
 class Coins extends Component {
     constructor(props) {
         gsap.registerPlugin(Draggable);
@@ -53,9 +52,7 @@ class Coins extends Component {
         }
     }
 
-
     replace_coins = () => {
-        ////////////////////////////////////////////////////////////////////////////
         let numberOfCoins = this.props.numberOfCoins;
         let this_x = 800 / (numberOfCoins + 6);
         let this_coin = numberOfCoins % 2 ? ["#nothing", "#ankh", "#feather"] : ["#nothing", "#feather", "#ankh"];
@@ -64,11 +61,9 @@ class Coins extends Component {
             this_coin.push("#coin" + i);
             coin_places.push(50 + (this_x * (i + 1)))
         }
-        console.log("coin_places:", coin_places);
         const tl = gsap.timeline({ paused: false });
         tl.to(this_coin, {
             x: i =>{
-                console.log("i:", i, coin_places[i]);
                 return Math.round(coin_places[i])},
             y: 0,
             ease: Power3.easeOut,
@@ -91,7 +86,6 @@ class Coins extends Component {
         this.draggables()
     }
 
-
     componentWillUpdate(nextProps, nextState) {
         //immediately before rendering when new props or state are being received
         if (this.props.numberOfCoins !== nextProps.numberOfCoins) {
@@ -102,7 +96,6 @@ class Coins extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-
         if (this.props.numberOfCoins !== nextProps.numberOfCoins) {
             return true;
         } else if (this.props.gameNumber !== nextProps.gameNumber) {
@@ -115,7 +108,6 @@ class Coins extends Component {
             return true
         }
         return false;
-
     }
 
     draggables() {
@@ -141,15 +133,9 @@ class Coins extends Component {
 
     render() {
         return (
-
             <div className="coins">
-
                 <Feather id="feather" my_index={this.props.numberOfCoins} />
                 <Ankh id="ankh" my_index={this.props.numberOfCoins + 1} />
-
-                {/*HAD USED MAP, BUT FOUND VERBOSE SWITCHES HELPED DEBUGGING*/}
-                {/*{this.coin_subset.map((image, i) => <Coin id={"coin" + i} key={"coin" + i} my_index={i} image_url={image} label={this.props.label}/>)}*/}
-
                 { 0 < this.props.numberOfCoins &&
                     <Coin id={"coin" + 0} key={"coin" + 0} my_index={0} image_url={this.coin_subset[0]}
                         label={this.props.label} />}

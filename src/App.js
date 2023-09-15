@@ -25,15 +25,15 @@ class App extends Component {
         this.readout = "Find the false coin within three measurements on the scale.";
         this.light_or_heavy = Math.floor(Math.random() * 2) + 1;
 
-        this.login_fn = (response_name) => {
+        this.getUserName = (response_name) => {
             let name = localStorage.getItem("name");
             if (name === null || name === "null" || name === "undefined" || name === undefined) {
                 name = 'guest' + Math.round(Math.random() * 100000);
                 this.userName = name;
                 localStorage.setItem("name", name);
             }
-            if (response_name !== null) {
-                if (response_name !== name) {
+            if (response_name !== null || response_name === undefined) {
+                if (typeof response_name === "string" && response_name !== name) {
                     name = response_name;
                     this.userName = name;
                     this.setState({
@@ -45,15 +45,14 @@ class App extends Component {
             return name
         };
 
-        this.userName = this.login_fn(null);
+        this.userName = this.getUserName(null);
         this.lastSavedGame = 0;
-
         this.state = {
             gameNumber: this.gameNumber,
             userName: this.userName,
             replayObject: [],
             rePlayMode: false,
-            lastSavedGame: this.lastSavedGame,
+            lastSavedGame: 0,
             labels: true,
             msg: this.readout,
             numberOfCoins: this.numberOfCoins,
@@ -115,6 +114,7 @@ class App extends Component {
     };
 
     //////////////////////////////////////////////////////////////////////////////////////
+    // POTENTIAL DEVELOPMENT
     // REPLAY OBJECT:
     // PLAYER NAME
     // GAME NUMBER
@@ -151,20 +151,14 @@ class App extends Component {
         //     saveState(response.data.user, response.data.id, responsedata)
         // });
     };
-
-
     backward_replay = () => {
         console.log('backward_replay');
         console.log(this.state.replayObject[0])
-
     };
-
     forward_replay = () => {
         console.log('forward_replay');
         console.log(this.state.replayObject[1])
-
     };
-
     //////////////////////////////////////////////////////////////////////////////////////
     //  SAVE GAMEOBJECT
     saveGameObject = (used, time, score, dur) => {
@@ -172,9 +166,9 @@ class App extends Component {
             return;
         }
         let change_name = (arg) => {
-            // console.log(arg);
+            console.log(arg);
             if (this.userName !== arg) {
-                this.login_fn(arg)
+                this.getUserName(arg)
                 this.userName = arg;
                 this.gameObject.userName = arg;
             }
@@ -185,7 +179,7 @@ class App extends Component {
                     userName: argname,
                     lastSavedGame: gameID
                 });
-                this.login_fn(argname)
+                this.getUserName(argname)
             } else {
                 this.setState({
                     lastSavedGame: gameID
@@ -198,7 +192,7 @@ class App extends Component {
         let _username = this.userName;
         let dat = (
             {
-                user: _username,
+                user: this.state.userName,
                 won: thescore,
                 duration: dur,
                 cheat: cheated,
@@ -215,26 +209,26 @@ class App extends Component {
             'Content-Type': 'application/json'
         };
         axios.post('https://hp5yhcm10f.execute-api.us-west-2.amazonaws.com/neo/coins_savegame', {
-            // axios.post('https://hp5yhcm10f.execute-api.us-west-2.amazonaws.com/neo', {
             data: dat
         }, { headers }
-        ).then(function (response) {
+        ).then((response) => {
             change_name(response.data.newGuest);
-            SavedGame(response.data.gameID, response.data.newGuest)
-        }).catch(error => console.log("error:", error));
+            // SavedGame(response.data.gameID, response.data.newGuest)
+            SavedGame(this.state.lastSavedGame + 1, this.state.userName)
+        }).catch(error => {
+            console.log("error:", error)
+
+        });
         this.gameSaved = this.gameObject.gameNumber
     };
 
-    //////////////////////////////////////////////////////////////////////////////////////
     reset_game = (numbr) => {
         if (typeof (numbr) !== "number") {
             numbr = this.state.numberOfCoins
         }
-
-        if (this.measurementsUsed > 0) {
-            // this.saveGameObject(this.measurementsUsed, "0:00", 0, 0);
-        }
-
+        // if (this.measurementsUsed > 0) {
+        //     // this.saveGameObject(this.measurementsUsed, "0:00", 0, 0);
+        // }
         let lucky_number_init = -1;
         this.cheated = false;
         this._child_timer.reset_time();
@@ -249,26 +243,18 @@ class App extends Component {
         this.light_or_heavy = Math.floor(Math.random() * 2) + 1;
         this.gameNumber = uuidv4();
         let icons = ["#scale_icon0", "#scale_icon1", "#scale_icon2"];
-        // gsap.to(icons, { duration: .5, autoAlpha: 1, ease: Power3.easeOut });
-        gsap.to("#scale_icon0", { duration: .5, autoAlpha: 1, ease: Power3.easeOut });
-        gsap.to("#scale_icon1", { duration: .5, autoAlpha: 1, ease: Power3.easeOut });
-        gsap.to("#scale_icon2", { duration: .5, autoAlpha: 1, ease: Power3.easeOut });
+        gsap.to(icons, { duration: .5, autoAlpha: 1, ease: Power3.easeOut });
         gsap.to("#cheat_btn", { duration: 2, color: "hsl(0, 0%, 100%)" });
         gsap.to("#messenger", { duration: 2, color: "hsl(0, 0%, 0%)" });
-
         this.setState({
             numberOfCoins: numbr,
             gameNumber: this.gameNumber,
             msg: this.readout,
         });
-
         this.reset_coins(numbr);
-
         // this.coin_location_array = this.reset_location_array(numbr);
         // this.coin_locations = this.coin_location_array.toString();
-
         this.gameObject = this.renew_game_object();
-
     };
     replace_coins = () => {
         this._child.replace_coins();
@@ -340,15 +326,12 @@ class App extends Component {
         let duration = this._child_timer.get_seconds();
         let number_of_coins = this.state.numberOfCoins;
         let coin_locations_now = this.coin_location_array.toString();
-        //
         if (measurement_constituted === 0 && coins_on_scale_now > 0 && this.coin_locations !== coin_locations_now) {
             // SCALE BALANCED, SO UPDATE GAMEOBJECT
             this.updateGameObject();
             if ((Math.abs(this.coin_location_array[number_of_coins]) === 1 || Math.abs(this.coin_location_array[number_of_coins + 1]) === 1) && coins_on_scale_now === 2) {
                 if (balanced === 0) {
                     if (this.measurementsUsed < 3) {
-                        // WIN
-                        // COLOR WARP
                         gsap.to(this.colr, {
                             duration: 1,
                             h: -360,
@@ -358,21 +341,13 @@ class App extends Component {
                             yoyo: true,
                             repeat: 2
                         });
-                        // /COLOR WARP
                         this.readout = 'You Win! ' + number_of_coins + ' Coins in ' + this.measurementsUsed + ' of 3 measurements! ' + time;
-
                         // SAVE GAME PROCEDURE
-
                         // IF USER IS ANONYMOUS
                         // // ASK FOR A NAME TO ENTER ON THE LEADER BOARD
-                        // SAVE VIA AJAX CALL
                         // //
                         this.saveGameObject(this.measurementsUsed, time, 1, duration);
-
-
                     } else if (this.measurementsUsed < 4) {
-                        // WIN
-                        // COLOR WARP
                         gsap.to(this.colr, {
                             duration: 4,
                             h: 360,
@@ -382,13 +357,9 @@ class App extends Component {
                             yoyo: true,
                             repeat: 2
                         });
-                        // /COLOR WARP
                         this.readout = 'You Win! ' + number_of_coins + ' Coins in ' + this.measurementsUsed + ' of 3 measurements! ' + time;
 
-                        // SAVE GAME
                         this.saveGameObject(this.measurementsUsed, time, 1, duration);
-
-
                     } else {
                         this.readout = 'Correct, but it took you ' + this.measurementsUsed + ' of 3 measurements. ' + time;
                         this.saveGameObject(this.measurementsUsed, time, 0, duration);
@@ -421,33 +392,15 @@ class App extends Component {
         gsap.to(["#messenger", "#cheat_btn"], { duration: 2, color: "hsl(0, 80%, 60%)" });
         this.cheated = true;
     };
-    coins_3 = () => {
-        this.reset_game(3)
-    };
-    coins_6 = () => {
-        this.reset_game(6)
-    };
-    coins_9 = () => {
-        this.reset_game(9)
-    };
-    coins_10 = () => {
-        this.reset_game(10)
-    };
-    coins_11 = () => {
-        this.reset_game(11)
-    };
-    coins_12 = () => {
-        this.reset_game(12)
-    };
-    coins_13 = () => {
-        this.reset_game(13)
-    };
-    coins_14 = () => {
-        this.reset_game(14)
-    };
-    coins_15 = () => {
-        this.reset_game(15)
-    };
+    coins_3 = () => { this.reset_game(3) };
+    coins_6 = () => { this.reset_game(6) };
+    coins_9 = () => { this.reset_game(9) };
+    coins_10 = () => { this.reset_game(10) };
+    coins_11 = () => { this.reset_game(11) };
+    coins_12 = () => { this.reset_game(12) };
+    coins_13 = () => { this.reset_game(13) };
+    coins_14 = () => { this.reset_game(14) };
+    coins_15 = () => { this.reset_game(15) };
     toggle_labels = () => {
         this.setState({
             labels: !this.state.labels
@@ -471,7 +424,7 @@ class App extends Component {
                     label={this.state.labels} balance_func={this.balance_scale} resetgame_fn={this.reset_game} />
                 <Controls lastGame={this.state.lastSavedGame} player_name={this.state.userName}
                     backwards_fn={this.backward_replay} forwards_fn={this.forward_replay}
-                    load_fn={this.enterReplay} />
+                    load_fn={this.enterReplay} login_fn={this.getUserName} />
                 <ScratchPad user_name={this.state.userName} last_game={this.state.lastSavedGame} />
             </div>
         );
