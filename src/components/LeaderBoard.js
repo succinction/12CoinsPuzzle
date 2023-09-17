@@ -1,7 +1,5 @@
-import { useState } from 'react';
 
 function LeaderBoard({ data }) {
-    const [initialized, setInitialized] = useState(false);
     return (
         <div className="leaders">
             <table>
@@ -9,34 +7,30 @@ function LeaderBoard({ data }) {
                     <tr>
                         <th colSpan="8">LEADER BOARD </th>
                     </tr>
-                    {/*<tr>*/}
-                    {/*<th colSpan="8">Refresh</th>*/}
-                    {/*</tr>*/}
                     <tr>
                         <th colSpan="8">Your Stats (You are: {data.user || ""}) </th>
                     </tr>
                     <tr >
                         <th>Name</th>
+                        <th>Total Games</th>
+                        <th>Total Wins</th>
                         <th>Ranking Score</th>
                         <th>Current Win Streak</th>
                         <th>Best Win Streak</th>
-                        <th>Total Wins</th>
-                        <th>Total Attempts</th>
                         <th>Accumulated Score</th>
                         <th>Best Score</th>
                     </tr>
-                    {/*</tr>*/}
                 </thead>
                 <tbody>
                     <tr >
-                        <td>{ data.user || "-"}</td>
-                        <td>{ data.overall_score || "-"}</td>
-                        <td>{ data.current_streak || "-"}</td>
-                        <td>{ data.best_streak || "-"}</td>
-                        <td>{ data.wins || "-"}</td>
-                        <td>{ data.attempts || "-"}</td>
-                        <td>{ data.score || "-"}</td>
-                        <td>{ data.best_score || "-"}</td>
+                        <td>{data.user || "-"}</td>
+                        <td>{data.attempts || "-"}</td>
+                        <td>{data.wins || "-"}</td>
+                        <td>{data.overall_score || "-"}</td>
+                        <td>{data.current_streak || "-"}</td>
+                        <td>{data.best_streak || "-"}</td>
+                        <td>{data.score || "-"}</td>
+                        <td>{data.best_score || "-"}</td>
                     </tr>
                 </tbody>
             </table>
@@ -47,135 +41,41 @@ function LeaderBoard({ data }) {
                     </tr>
                     <tr >
                         <th>Player Name</th>
+                        <th>Total Games</th>
+                        <th>Total Wins</th>
                         <th>Ranking Score</th>
                         <th>Best Win Streak</th>
                         <th>Current Win Streak</th>
-                        <th>Total Wins</th>
-                        <th>Total Attempts</th>
                         <th>Accumulated Score</th>
                         <th>Best Score</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr >
-
-                        <td>{initialized && data.bestPlayers[0].user || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].overall_score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].current_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].wins || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].attempts || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_score || "-"}</td>
-
+                    {!!data['bestPlayers'] && data.bestPlayers.length > 0 && data.bestPlayers.map((plyer) => <tr >
+                        <td>{plyer.user || "-"}</td>
+                        <td>{plyer.wins || "-"}</td>
+                        <td>{plyer.attempts || "-"}</td>
+                        <td>{plyer.overall_score || "-"}</td>
+                        <td>{plyer.best_streak || "-"}</td>
+                        <td>{plyer.current_streak || "-"}</td>
+                        <td>{plyer.score || "-"}</td>
+                        <td>{plyer.best_score || "-"}</td>
                     </tr>
-                    <tr >
-
-                    <td>{initialized && data.bestPlayers[0].user || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].overall_score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].current_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].wins || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].attempts || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_score || "-"}</td>
-
-                    </tr>
-                    <tr >
-
-                    <td>{initialized && data.bestPlayers[0].user || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].overall_score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].current_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].wins || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].attempts || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_score || "-"}</td>
-
-                    </tr>
-                    <tr >
-
-                    <td>{initialized && data.bestPlayers[0].user || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].overall_score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].current_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].wins || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].attempts || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_score || "-"}</td>
-
-                    </tr>
-                    <tr >
-
-                    <td>{initialized && data.bestPlayers[0].user || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].overall_score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].current_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].wins || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].attempts || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_score || "-"}</td>
-
-                    </tr>
-                    <tr >
-                        <td>{initialized && data.bestPlayers[0].user || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].overall_score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].current_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].wins || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].attempts || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_score || "-"}</td>
-
-                    </tr>
-                    <tr >
-                        <td>{initialized && data.bestPlayers[0].user || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].overall_score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].current_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].wins || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].attempts || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_score || "-"}</td>
-
-                    </tr>
-                    <tr >
-                        <td>{initialized && data.bestPlayers[0].user || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].overall_score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].current_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].wins || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].attempts || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_score || "-"}</td>
-
-                    </tr>
-                    <tr >
-                        <td>{initialized && data.bestPlayers[0].user || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].overall_score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].current_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].wins || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].attempts || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_score || "-"}</td>
-
-                    </tr>
-                    <tr >
-                        <td>{initialized && data.bestPlayers[0].user || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].overall_score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].current_streak || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].wins || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].attempts || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].score || "-"}</td>
-                        <td>{initialized && data.bestPlayers[0].best_score || "-"}</td>
-
-                    </tr>
-
+                    )}
+                    {!!data['bestPlayers'] && data.bestPlayers.length > 0  ||
+                        <tr >
+                            <td>{"-"}</td>
+                            <td>{"-"}</td>
+                            <td>{"-"}</td>
+                            <td>{"-"}</td>
+                            <td>{"-"}</td>
+                            <td>{"-"}</td>
+                            <td>{"-"}</td>
+                            <td>{"-"}</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
-            
             <table>
                 <thead>
                     <tr>
@@ -189,68 +89,25 @@ function LeaderBoard({ data }) {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>{initialized && data.yourLastGames[0].gameID}</td>
-                        <td>{initialized && data.yourLastGames[0].finalTime}</td>
-                        <td>{initialized && data.yourLastGames[0].score}</td>
-                        <td>{initialized && data.yourLastGames[0].gameType}</td>
+                    {!!data['yourLastGames'] && data.yourLastGames.length > 0 && data.yourLastGames.map((gamex) => <tr>
+                        <td>{gamex.gameID || "-"}</td>
+                        <td>{gamex.finalTime || "-"}</td>
+                        <td>{gamex.score || "-"}</td>
+                        <td>{gamex.gameType || "-"}</td>
                     </tr>
-                    <tr>
-                        <td>{initialized && data.yourLastGames[1].gameID}</td>
-                        <td>{initialized && data.yourLastGames[1].finalTime}</td>
-                        <td>{initialized && data.yourLastGames[1].score}</td>
-                        <td>{initialized && data.yourLastGames[1].gameType}</td>
-                    </tr>
-                    <tr>
-                        <td>{initialized && data.yourLastGames[2].gameID}</td>
-                        <td>{initialized && data.yourLastGames[2].finalTime}</td>
-                        <td>{initialized && data.yourLastGames[2].score}</td>
-                        <td>{initialized && data.yourLastGames[2].gameType}</td>
-                    </tr>
-                    <tr>
-                        <td>{initialized && data.yourLastGames[3].gameID}</td>
-                        <td>{initialized && data.yourLastGames[3].finalTime}</td>
-                        <td>{initialized && data.yourLastGames[3].score}</td>
-                        <td>{initialized && data.yourLastGames[3].gameType}</td>
-                    </tr>
-                    <tr>
-                        <td>{initialized && data.yourLastGames[4].gameID}</td>
-                        <td>{initialized && data.yourLastGames[4].finalTime}</td>
-                        <td>{initialized && data.yourLastGames[4].score}</td>
-                        <td>{initialized && data.yourLastGames[4].gameType}</td>
-                    </tr>
-                    <tr>
-                        <td>{initialized && data.yourLastGames[5].gameID}</td>
-                        <td>{initialized && data.yourLastGames[5].finalTime}</td>
-                        <td>{initialized && data.yourLastGames[5].score}</td>
-                        <td>{initialized && data.yourLastGames[5].gameType}</td>
-                    </tr>
-                    <tr>
-                        <td>{initialized && data.yourLastGames[6].gameID}</td>
-                        <td>{initialized && data.yourLastGames[6].finalTime}</td>
-                        <td>{initialized && data.yourLastGames[6].score}</td>
-                        <td>{initialized && data.yourLastGames[6].gameType}</td>
-                    </tr>
-                    <tr>
-                        <td>{initialized && data.yourLastGames[7].gameID}</td>
-                        <td>{initialized && data.yourLastGames[7].finalTime}</td>
-                        <td>{initialized && data.yourLastGames[7].score}</td>
-                        <td>{initialized && data.yourLastGames[7].gameType}</td>
-                    </tr>
-                    <tr>
-                        <td>{initialized && data.yourLastGames[8].gameID}</td>
-                        <td>{initialized && data.yourLastGames[8].finalTime}</td>
-                        <td>{initialized && data.yourLastGames[8].score}</td>
-                        <td>{initialized && data.yourLastGames[8].gameType}</td>
-                    </tr>
-                    <tr>
-                        <td>{initialized && data.yourLastGames[9].gameID}</td>
-                        <td>{initialized && data.yourLastGames[9].finalTime}</td>
-                        <td>{initialized && data.yourLastGames[9].score}</td>
-                        <td>{initialized && data.yourLastGames[9].gameType}</td>
-                    </tr>
+                    )}
+                    {!!data['yourLastGames'] ||
+                        <tr >
+                            <td>{"-"}</td>
+                            <td>{"-"}</td>
+                            <td>{"-"}</td>
+                            <td>{"-"}</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
+
+
 
             {/*<table>*/}
             {/*<thead>*/}
@@ -304,7 +161,6 @@ function LeaderBoard({ data }) {
 
             {/*</table>*/}
         </div>
-
     );
 }
 

@@ -4,7 +4,7 @@ import Login from "./Login";
 import Accordion from "./Accordion";
 import axios from 'axios';
 
-class ScratchPad extends Component {
+class Body extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -66,13 +66,13 @@ class ScratchPad extends Component {
             <div className="scratch">
                 {/* <Login /> */}{/*LOGIN NOT FULLY IMPLEMENTED*/}
                 <h2>Discover the False Coin in <stroing> 3 </stroing> Measurements</h2>
-                <Accordion buttonText={"LEADER BOARD"} ID="me_0" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
+                <Accordion buttonText={"LEADER BOARD"} ID="open_0" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
                     <LeaderBoard data={this.state.response_data} />
                 </Accordion>
 
 
                 <h3>How to play:</h3>
-                <Accordion buttonText={'Quickstart How To Play video'} ID="me_5" actionID="accordionClicker4" groupID="bbb" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
+                <Accordion buttonText={'Quickstart How To Play video'} ID="open_5" actionID="accordionClicker4" groupID="bbb" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
                     <div className="video">
                         <p>
                             <iframe title="How to play" id="video1" width="640" height="360"
@@ -81,7 +81,7 @@ class ScratchPad extends Component {
                         </p>
                     </div>
                 </Accordion>
-                <Accordion buttonText={'How to play'} ID="me_2" actionID="accordionClicker2" groupID="AAA" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
+                <Accordion buttonText={'How to play'} ID="open_2" actionID="accordionClicker2" groupID="AAA" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
 
                     Drag the coins onto the scale. <br />
                     To win, balance the false coin against the Ank or Feather after measuring only 3 times <br />
@@ -143,7 +143,7 @@ class ScratchPad extends Component {
                     </ul>
                 </Accordion>
                 <p> </p>
-                <Accordion buttonText={'Demonstration of solution: (Spoiler)'} ID="me_1" actionID="accordionClicker1" groupID="AAA" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
+                <Accordion buttonText={'Demonstration of solution: (Spoiler)'} ID="open_1" actionID="accordionClicker1" groupID="AAA" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
                     <div className="video">
                         <p>
                             <iframe title="vid" id="video" width="640" height="360"
@@ -162,4 +162,4 @@ class ScratchPad extends Component {
     }
 }
 
-export default ScratchPad;
+export default Body;

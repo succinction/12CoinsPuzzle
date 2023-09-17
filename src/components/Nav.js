@@ -5,18 +5,18 @@ class Nav extends Component {
     constructor(props) {
         super(props)
     }
-
     componentDidMount() {
-        const nav_id = ["#restart_btn", "#label_btn", "#cheat_btn", "#replace_btn", "#coins_3_btn", "#coins_6_btn", "#coins_9_btn", "#coins_10_btn", "#coins_11_btn", "#coins_12_btn", "#coins_13_btn", "#coins_14_btn", "#coins_15_btn", "#scale_icon0", "#scale_icon1", "#scale_icon2"];
+        const nav_id = ["#restart_btn", "#label_btn", "#cheat_btn", "#replace_btn", "#coins_3_btn", "#coins_6_btn", "#coins_9_btn", "#coins_10_btn", "#coins_11_btn", "#coins_12_btn", "#coins_13_btn", "#coins_14_btn", "#coins_15_btn"];
         const tl = gsap.timeline({
-            delay: 0.1,
+            delay: .3,
             defaults: { 
-                duration: .8,
+                duration: .68,
                 stagger: .1,
-                ease: Power3.easeOut
+                ease: Power3.easeOut, 
+                autoAlpha: 1
             },
         });
-        tl.fromTo(nav_id, { y: -50 }, { y: 0 }, "-=0.7")
+        tl.fromTo(nav_id, { y: -30 }, { y: 0 }, "-=0.7")
         tl.play()
     }
     render() {

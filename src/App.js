@@ -5,7 +5,7 @@ import Nav from './components/Nav'
 import Bg from './components/Bg'
 import Instructions from './components/Instructions'
 import Message from './components/Message'
-import ScratchPad from './components/ScratchPad';
+import Body from './components/Body';
 import Scale from './components/Scale'
 import Timer from './components/Timer';
 import { gsap, Power3 } from 'gsap';
@@ -17,12 +17,13 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.gameNumber = uuidv4();
-        const initialNumberOfCoins = 9;
+        const initialNumberOfCoins = Number(localStorage.getItem("initialNumberOfCoins")) || 12;
+        localStorage.setItem("initialNumberOfCoins", initialNumberOfCoins);
         this.numberOfCoins = initialNumberOfCoins;
         this.lucky_number = Math.floor(Math.random() * initialNumberOfCoins);
         this.coin_weights = [Number(6), Number(5), Number(7)];
         this.measurementsUsed = 0;
-        this.readout = "Find the false coin within three measurements on the scale.";
+        this.readout = "Find the false coin within three measurements.";
         this.light_or_heavy = Math.floor(Math.random() * 2) + 1;
 
         this.getUserName = (response_name) => {
@@ -189,7 +190,6 @@ class App extends Component {
         let cheated = (this.cheated) ? 'True' : 'False';
         let scoretime = (this.cheated) ? time + "-cheat" : time;
         let thescore = (this.cheated) ? 0 : score;
-        let _username = this.userName;
         let dat = (
             {
                 user: this.state.userName,
@@ -226,9 +226,6 @@ class App extends Component {
         if (typeof (numbr) !== "number") {
             numbr = this.state.numberOfCoins
         }
-        // if (this.measurementsUsed > 0) {
-        //     // this.saveGameObject(this.measurementsUsed, "0:00", 0, 0);
-        // }
         let lucky_number_init = -1;
         this.cheated = false;
         this._child_timer.reset_time();
@@ -238,7 +235,7 @@ class App extends Component {
             lucky_number_init = Math.floor(Math.random() * this.state.numberOfCoins);
         }
         this.measurementsUsed = 0;
-        this.readout = "Find the false coin within three measurements on the scale.";
+        this.readout = "Find the false coin within three measurements.";
         this.lucky_number = lucky_number_init;
         this.light_or_heavy = Math.floor(Math.random() * 2) + 1;
         this.gameNumber = uuidv4();
@@ -251,6 +248,7 @@ class App extends Component {
             gameNumber: this.gameNumber,
             msg: this.readout,
         });
+        localStorage.setItem("initialNumberOfCoins", numbr)
         this.reset_coins(numbr);
         // this.coin_location_array = this.reset_location_array(numbr);
         // this.coin_locations = this.coin_location_array.toString();
@@ -414,7 +412,7 @@ class App extends Component {
                 <Scale balanced={this.state.balanced} />
                 <Timer ref={(child) => this._child_timer = child} />
                 <Instructions />
-                <Message msg={this.state.msg} className="messenger" id="messenger" />
+                <Message msg={this.state.msg} className="messenger" id="messenger" num={this.state.numberOfCoins} />
                 <Nav className="nav" coins_3_fn={this.coins_3} coins_6_fn={this.coins_6} coins_9_fn={this.coins_9}
                     coins_10_fn={this.coins_10} coins_11_fn={this.coins_11} coins_12_fn={this.coins_12}
                     coins_13_fn={this.coins_13} coins_14_fn={this.coins_14} coins_15_fn={this.coins_15}
@@ -425,7 +423,7 @@ class App extends Component {
                 <Controls lastGame={this.state.lastSavedGame} player_name={this.state.userName}
                     backwards_fn={this.backward_replay} forwards_fn={this.forward_replay}
                     load_fn={this.enterReplay} login_fn={this.getUserName} />
-                <ScratchPad user_name={this.state.userName} last_game={this.state.lastSavedGame} />
+                <Body user_name={this.state.userName} last_game={this.state.lastSavedGame} />
             </div>
         );
     }
