@@ -10,16 +10,30 @@ leader_table = dynamodb.Table('LeaderBoard')
 now = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
 
 def lambda_handler(eventData, context):
-    try:
-    # if True:
+    # try:
+    if True:
         event = eventData['data']
         event_user = "__NOTHING__" if 'user' not in event else event['user']
         raw_userRecord = dict( users_table.get_item(Key={'user': event_user }) )
         userRecord = raw_userRecord['Item'] if 'Item' in raw_userRecord else {'new_record': "new_record"}
+        if "pin" in userRecord:
+            if int(userRecord['pin']) > 1:
+                if "pin" in event:
+                    if int(event['pin']) != int(userRecord['pin']):
+                        event_user = event_user + " imposter"
+                        # userRecord['user'] = event_user
+                        raw_userRecord = dict( users_table.get_item(Key={'user': event_user }) )
+                        userRecord = raw_userRecord['Item'] if  'Item' in raw_userRecord else {'new_record': "new_record"}
+                        print(f"event_user {event_user}")
+                                # return {
+                                #     'statusCode': 401,
+                                #     'body': 'PIN does not match. Retry or Choose a new user name.'
+                                # }
+                        
         gamewon = event['won']
         scoring = 0 if gamewon == 0 else round(10 * ( int(event['gameType']) / (1 + (int(event['duration']) / 60))))
         game_response = games_table.put_item(Item={
-                'user': event['user'],
+                'user': event_user,
                 'date':now,
                 'gameNumber':event['gameNumber'],
                 'numberOfMeasurements':event['numberOfMeasurements'],
@@ -55,13 +69,13 @@ def lambda_handler(eventData, context):
             omitted = 99
             for i in range(len(leader_records)):
                 # print("================================================v")
-                if int(leader_records_ranked[i]['overall_score']) < int(userRecord['overall_score']):
-                    leader_rank = leader_rank if leader_rank < i and leader_rank != -1 else i
-                    
                 aa = str(leader_records_ranked[i]['user'])
                 bb = str(userRecord['user'])
                 if aa == bb:
                     omitted = i
+                if int(leader_records_ranked[i]['overall_score']) < int(userRecord['overall_score']):
+                    leader_rank = leader_rank if leader_rank < i and leader_rank != -1 else i
+                    
                 # print("================================================^")
 
             if leader_rank != -1:
@@ -89,9 +103,9 @@ def lambda_handler(eventData, context):
                         'best_streak': new_lead_record['best_streak'],
                         'overall_score': new_lead_record['overall_score']
                     })
-            
+            print(f"event_user {event_user}")
             user_response = users_table.put_item(Item={
-                    'user': event['user'],
+                    'user': event_user,
                     'score': userRecord['score'],
                     'best_score': userRecord['best_score'],
                     'attempts':userRecord['attempts'],
@@ -99,11 +113,12 @@ def lambda_handler(eventData, context):
                     'current_streak': userRecord['current_streak'],
                     'best_streak': userRecord['best_streak'],
                     'overall_score': userRecord['overall_score'],
-                    'date': now
+                    'date': now,
+                    'pin': event['pin']
             })
         else:
             new_user_response = users_table.put_item(Item={
-                    'user': event['user'],
+                    'user': event_user,
                     'date': now,
                     'score': scoring,
                     'best_score': scoring,
@@ -111,16 +126,17 @@ def lambda_handler(eventData, context):
                     'wins': gamewon,
                     'current_streak': gamewon,
                     'best_streak': gamewon,
-                    'overall_score': scoring
+                    'overall_score': scoring,
+                    'pin': event['pin']
             })
                 
         return {
             'statusCode': 200,
             'body': json.dumps( 'userRecord => ' + str(userRecord) )
         }
-    except Exception as e:
-        print(f"e {e}")
-        return {
-            'statusCode': 418,
-            'body': 'something went wrong in the lambda_handler'
-        }
+    # except Exception as e:
+    #     print(f"e {e}")
+    #     return {
+    #         'statusCode': 418,
+    #         'body': 'something went wrong in the lambda_handler'
+    #     }
