@@ -19,7 +19,7 @@ class Body extends Component {
                 this.getLeaderBoard(this.props.user_name)
             }
         }
-        console.log("UPDATE getLeaderBoard?", this.props.user_name !== nextProps.user_name || this.props.last_game !== nextProps.last_game)
+        // console.log("UPDATE getLeaderBoard?", this.props.user_name !== nextProps.user_name || this.props.last_game !== nextProps.last_game)
     }
 
 
@@ -46,7 +46,6 @@ class Body extends Component {
     }
 
     callbackFn = (bool) => {
-        // Do some effect
         console.log("callbackFn(" + bool + ")")
     }
 
@@ -54,7 +53,7 @@ class Body extends Component {
         return (
             <div className="scratch">
                 {/* <Login /> */}{/*LOGIN NOT FULLY IMPLEMENTED*/}
-                <h2>Discover the False Coin in <stroing> 3 </stroing> Measurements</h2>
+                <h2>Discover the False Coin in <strong> 3 </strong> Measurements</h2>
                 <Accordion buttonText={"LEADER BOARD"} ID="open_0" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
                     <LeaderBoard data={this.state.response_data} refreshFn={() => this.getLeaderBoard(this.props.user_name)} />
                 </Accordion>
@@ -134,6 +133,7 @@ class Body extends Component {
                     <ul>
                         <li>Option for identical coins</li>
                         <li>Responsive dimensions for Mobile</li>
+                        <li>Replay mode</li>
                     </ul>
                     <h4>Bugs</h4>
                     <ul>

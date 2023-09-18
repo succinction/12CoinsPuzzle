@@ -54,7 +54,7 @@ function LeaderBoard({ data, refreshFn }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {!!data['bestPlayers'] && data.bestPlayers.length > 0 && data.bestPlayers.sort((a, b) => a.rank - b.rank).map((plyer) => <tr >
+                    {!!data['bestPlayers'] && data.bestPlayers.length > 0 && data.bestPlayers.sort((a, b) => a.rank - b.rank).map((plyer, i) => <tr key={i}>
                         <td>{places[plyer.rank] || "-"}</td>
                         <td>{plyer.user || "-"}</td>
                         <td>{plyer.overall_score || "-"}</td>
@@ -87,18 +87,24 @@ function LeaderBoard({ data, refreshFn }) {
                         <th colSpan="4">Your Recent Games</th>
                     </tr>
                     <tr>
-                        <th>Game ID</th>
+                        <th>Game</th>
+                        <th>Date</th>
                         <th>Final Time</th>
                         <th>Score</th>
                         <th>Game Type</th>
+                        <th>Won</th>
+                        <th>Measurements</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {!!data['yourLastGames'] && data.yourLastGames.length > 0 && data.yourLastGames.map((gamex) => <tr>
-                        <td>{gamex.gameID || "-"}</td>
+                    {!!data['yourLastGames'] && data.yourLastGames.length > 0 && data.yourLastGames.map((gamex, i) => <tr key={i}>
+                        <td>{data.yourLastGames.length - i || "-"}</td>
+                        <td>{gamex.date || "-"}</td>
                         <td>{gamex.finalTime || "-"}</td>
                         <td>{gamex.score || "-"}</td>
                         <td>{gamex.gameType || "-"}</td>
+                        <td>{gamex.won || "-"}</td>
+                        <td>{gamex.numberOfMeasurements || "-"}</td>
                     </tr>
                     )}
                     {!!data['yourLastGames'] ||

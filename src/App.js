@@ -19,22 +19,34 @@ class App extends Component {
         this.gameNumber = uuidv4();
         const initialNumberOfCoins = Number(localStorage.getItem("initialNumberOfCoins")) || 12;
         localStorage.setItem("initialNumberOfCoins", initialNumberOfCoins);
+        const initialLabels = Boolean(Number(localStorage.getItem("initialLabels")) == 1) || false;
+        localStorage.setItem("initialLabels", initialLabels ? 1 : 0);
+        const PIN = Number(localStorage.getItem("PIN")) || -1;
+        localStorage.setItem("PIN", PIN );
+        this.showLabels = initialLabels;
         this.numberOfCoins = initialNumberOfCoins;
         this.lucky_number = Math.floor(Math.random() * initialNumberOfCoins);
         this.coin_weights = [Number(6), Number(5), Number(7)];
         this.measurementsUsed = 0;
         this.readout = "Find the false coin within three measurements.";
         this.light_or_heavy = Math.floor(Math.random() * 2) + 1;
+        this.pin = PIN;
 
-        this.getUserName = (response_name) => {
+        this.getUserName = (response_name, pin) => {
+            console.log("response_name", response_name)
+            if (pin) {
+                this.pin = pin
+                localStorage.setItem("PIN", pin );
+            }
             let name = localStorage.getItem("name");
             if (name === null || name === "null" || name === "undefined" || name === undefined) {
                 name = 'guest' + Math.round(Math.random() * 100000);
                 this.userName = name;
                 localStorage.setItem("name", name);
             }
-            if (response_name !== null || response_name === undefined) {
+            if (response_name !== null && response_name !== undefined) {
                 if (typeof response_name === "string" && response_name !== name) {
+                    console.log("new _name", response_name)
                     name = response_name;
                     this.userName = name;
                     this.setState({
@@ -54,7 +66,7 @@ class App extends Component {
             replayObject: [],
             rePlayMode: false,
             lastSavedGame: 0,
-            labels: true,
+            labels: initialLabels,
             msg: this.readout,
             numberOfCoins: this.numberOfCoins,
             balanced: 0
@@ -167,7 +179,7 @@ class App extends Component {
             return;
         }
         let change_name = (arg) => {
-            console.log(arg);
+            // console.log(arg);
             if (this.userName !== arg) {
                 this.getUserName(arg)
                 this.userName = arg;
@@ -190,6 +202,7 @@ class App extends Component {
         let cheated = (this.cheated) ? 'True' : 'False';
         let scoretime = (this.cheated) ? time + "-cheat" : time;
         let thescore = (this.cheated) ? 0 : score;
+        console.log('pin', this.pin)
         let dat = (
             {
                 user: this.state.userName,
@@ -202,6 +215,7 @@ class App extends Component {
                 finalTime: scoretime,
                 falseCoin: this.gameObject.falseCoin,
                 measurements: JSON.stringify(this.gameObject.measurements),
+                pin: this.pin
             }
         );
 
@@ -212,7 +226,8 @@ class App extends Component {
             data: dat
         }, { headers }
         ).then((response) => {
-            change_name(response.data.newGuest);
+            console.log("response", response)
+            change_name(response.data.user);
             // SavedGame(response.data.gameID, response.data.newGuest)
             SavedGame(this.state.lastSavedGame + 1, this.state.userName)
         }).catch(error => {
@@ -400,6 +415,7 @@ class App extends Component {
     coins_14 = () => { this.reset_game(14) };
     coins_15 = () => { this.reset_game(15) };
     toggle_labels = () => {
+        localStorage.setItem("initialLabels", !this.state.labels ? 1 : 0 )
         this.setState({
             labels: !this.state.labels
         });
@@ -420,7 +436,7 @@ class App extends Component {
                     label_fn={this.toggle_labels} />
                 <Coins ref={(child) => this._child = child} gameNumber={this.state.gameNumber} numberOfCoins={this.state.numberOfCoins}
                     label={this.state.labels} balance_func={this.balance_scale} resetgame_fn={this.reset_game} />
-                <Controls lastGame={this.state.lastSavedGame} player_name={this.state.userName}
+                <Controls lastGame={this.state.lastSavedGame} player_name={this.state.userName} pin={this.pin}
                     backwards_fn={this.backward_replay} forwards_fn={this.forward_replay}
                     load_fn={this.enterReplay} login_fn={this.getUserName} />
                 <Body user_name={this.state.userName} last_game={this.state.lastSavedGame} />
