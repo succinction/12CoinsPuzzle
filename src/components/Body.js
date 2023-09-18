@@ -25,30 +25,19 @@ class Body extends Component {
 
     getLeaderBoard(username) {
         const setData = (responsedat) => {
-            console.log("THIS MEANS AJAX SUCCESS RETURN")
-            console.log("-- : responsedat : ", responsedat)
-            console.log("-- : responsedat.data : ", responsedat.data)
-            console.log("-- : responsedat.data.score : ", responsedat.data.score)
-            // console.log("setData : responsedat : ", responsedat.data.yourStats)
-            // console.log("setData : responsedat : ", responsedat.data.yourBestGames)
-            // console.log("setData : responsedat : ", responsedat.data.yourLastGames)
             this.setState({
                 response_data: responsedat.data
             });
         };
-///                        https://hp5yhcm10f.execute-api.us-west-2.amazonaws.com/neo
         // const url_is = 'https://hp5yhcm10f.execute-api.us-west-2.amazonaws.com/neo/leaderboard?user=' + username;
         const url_is = 'https://gmrcfrizcef35bii6c2v2333xe0tsvek.lambda-url.us-west-2.on.aws/?user=' + username;
-        // console.log('getLeaderBoard url: ', url_is);
-        // console.log('getLeaderBoard ... username: ', this.props.user_name);
-
         axios({
             method: 'get',
             headers: { 'Content-Type': 'application/json' },
             url: url_is
         }).then(function (response) {
             setData(response)
-        }).catch(error => console.log("error:", error));;
+        }).catch(error => console.log("error:", error));
 
     }
 
@@ -67,7 +56,7 @@ class Body extends Component {
                 {/* <Login /> */}{/*LOGIN NOT FULLY IMPLEMENTED*/}
                 <h2>Discover the False Coin in <stroing> 3 </stroing> Measurements</h2>
                 <Accordion buttonText={"LEADER BOARD"} ID="open_0" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
-                    <LeaderBoard data={this.state.response_data} />
+                    <LeaderBoard data={this.state.response_data} refreshFn={() => this.getLeaderBoard(this.props.user_name)} />
                 </Accordion>
 
 
@@ -122,6 +111,15 @@ class Body extends Component {
                     Measure the false coin against the Ankh if it is heavy, or against the Feather if it is light. The
                     verification measurement is not counted unless it is incorrect. Enjoy!
                 </p>
+                  <Accordion buttonText={'Demonstration of solution: (Spoiler)'} ID="open_1" actionID="accordionClicker1" groupID="AAA" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
+                    <div className="video">
+                        <p>
+                            <iframe title="vid" id="video" width="640" height="360"
+                                src="https://www.youtube.com/embed/sk6q6sG-7Ls?rel=0"
+                                allowFullScreen></iframe>
+                        </p>
+                    </div>
+                </Accordion>
                     <h4>Button functionality</h4>
                     <p>
                         <strong>Restart:</strong> Resets the game and clears the score. Reassigns the false coin. <br />
@@ -143,15 +141,7 @@ class Body extends Component {
                     </ul>
                 </Accordion>
                 <p> </p>
-                <Accordion buttonText={'Demonstration of solution: (Spoiler)'} ID="open_1" actionID="accordionClicker1" groupID="AAA" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
-                    <div className="video">
-                        <p>
-                            <iframe title="vid" id="video" width="640" height="360"
-                                src="https://www.youtube.com/embed/sk6q6sG-7Ls?rel=0"
-                                allowFullScreen></iframe>
-                        </p>
-                    </div>
-                </Accordion>
+              
                 <br />
                 <div className="bottom">
                     <span className="copyright">Copyright 2006-2023   Joseph Howard   | <a

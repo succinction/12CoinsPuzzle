@@ -18,6 +18,11 @@ function Accordion({ ID, children, buttonText }) {
         const height = (element.scrollHeight * (isOpen ? 1 : 0)) + "px"
         gsap.to(element, { duration: .29, ease: Power3.easeOut, maxHeight: height })
     }, [])
+    useEffect(() => {
+        const element = document.getElementById(myID)
+        const height = (element.scrollHeight * (isOpen ? 1 : 0)) + "px"
+        gsap.to(element, { duration: .29, ease: Power3.easeOut, maxHeight: height })
+    }, [children])
     return (
         <>
             <button id={myID + 'button'} onClick={activate} >{buttonText}</button>

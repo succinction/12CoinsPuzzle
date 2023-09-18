@@ -17,8 +17,8 @@ class Controls extends Component {
                 <button id="load" className="btn" onClick={this.loadGame}> CHANGE </button>
                 <br />
 
-                Player: {this.props.player_name}  |
-                Game Number: {this.props.lastGame} |
+                Player: {this.props.player_name}  
+                {/* Game Number: {this.props.lastGame} | */}
                 {/* <strong> {measure_num} </strong> */}
                 {/* <button id="backwards" className="btn" onClick={this.props.backwards_fn}> back </button> | */}
                 {/* <button id="forwards" className="btn" onClick={this.props.forwards_fn}> next </button> */}

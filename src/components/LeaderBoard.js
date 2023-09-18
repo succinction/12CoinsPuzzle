@@ -1,11 +1,13 @@
+function LeaderBoard({ data, refreshFn }) {
+    const places = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th"];
 
-function LeaderBoard({ data }) {
     return (
         <div className="leaders">
             <table>
                 <thead>
                     <tr>
-                        <th colSpan="8">LEADER BOARD </th>
+                        <th colSpan="6">LEADER BOARD  </th>
+                        <th colSpan="2">   <button id="refreshBtn" onClick={refreshFn} >Refresh</button> </th>
                     </tr>
                     <tr>
                         <th colSpan="8">Your Stats (You are: {data.user || ""}) </th>
@@ -37,33 +39,36 @@ function LeaderBoard({ data }) {
             <table>
                 <thead>
                     <tr>
-                        <th colSpan="8">Highest Ranked Players *</th>
+                        <th colSpan="9">Highest Ranked Players *</th>
                     </tr>
                     <tr >
+                        <th>Rank</th>
                         <th>Player Name</th>
-                        <th>Total Games</th>
-                        <th>Total Wins</th>
                         <th>Ranking Score</th>
-                        <th>Best Win Streak</th>
-                        <th>Current Win Streak</th>
                         <th>Accumulated Score</th>
                         <th>Best Score</th>
+                        <th>Total Games</th>
+                        <th>Total Wins</th>
+                        <th>Best Win Streak</th>
+                        <th>Current Win Streak</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {!!data['bestPlayers'] && data.bestPlayers.length > 0 && data.bestPlayers.map((plyer) => <tr >
+                    {!!data['bestPlayers'] && data.bestPlayers.length > 0 && data.bestPlayers.sort((a, b) => a.rank - b.rank).map((plyer) => <tr >
+                        <td>{places[plyer.rank] || "-"}</td>
                         <td>{plyer.user || "-"}</td>
-                        <td>{plyer.wins || "-"}</td>
-                        <td>{plyer.attempts || "-"}</td>
                         <td>{plyer.overall_score || "-"}</td>
-                        <td>{plyer.best_streak || "-"}</td>
-                        <td>{plyer.current_streak || "-"}</td>
                         <td>{plyer.score || "-"}</td>
                         <td>{plyer.best_score || "-"}</td>
+                        <td>{plyer.attempts || "-"}</td>
+                        <td>{plyer.wins || "-"}</td>
+                        <td>{plyer.best_streak || "-"}</td>
+                        <td>{plyer.current_streak || "-"}</td>
                     </tr>
                     )}
                     {!!data['bestPlayers'] && data.bestPlayers.length > 0  ||
                         <tr >
+                            <td>{"-"}</td>
                             <td>{"-"}</td>
                             <td>{"-"}</td>
                             <td>{"-"}</td>
