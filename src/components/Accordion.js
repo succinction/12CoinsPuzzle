@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { gsap, Power3 } from 'gsap'
 
 function Accordion({ ID, children, buttonText }) {

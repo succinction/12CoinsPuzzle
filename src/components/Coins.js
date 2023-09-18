@@ -134,8 +134,8 @@ class Coins extends Component {
     render() {
         return (
             <div className="coins">
-                <Feather id="feather" my_index={this.props.numberOfCoins} />
-                <Ankh id="ankh" my_index={this.props.numberOfCoins + 1} />
+                <Feather id="feather" my_index={this.props.numberOfCoins} label={this.props.label}  />
+                <Ankh id="ankh" my_index={this.props.numberOfCoins + 1} label={this.props.label}  />
                 { 0 < this.props.numberOfCoins &&
                     <Coin id={"coin" + 0} key={"coin" + 0} my_index={0} image_url={this.coin_subset[0]}
                         label={this.props.label} />}
