@@ -39,7 +39,7 @@ class App extends Component {
         window.addEventListener("resize", mobileResponsiveness);
 
         this.gameNumber = uuidv4();
-        const initialNumberOfCoins = Number(localStorage.getItem("initialNumberOfCoins")) || 3;
+        const initialNumberOfCoins = Number(localStorage.getItem("initialNumberOfCoins")) || 9;
         localStorage.setItem("initialNumberOfCoins", initialNumberOfCoins);
         const initialLabels = Boolean(Number(localStorage.getItem("initialLabels")) == 1) || false;
         localStorage.setItem("initialLabels", initialLabels ? 1 : 0);
