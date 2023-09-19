@@ -28,7 +28,7 @@ class Nav extends Component {
                 <button id="replace_btn" className="btn" onClick={this.props.replace_fn}>Replace</button>
                 <button id="coins_3_btn" className="btn" onClick={this.props.coins_3_fn}>3</button>
                 <button id="coins_6_btn" className="btn" onClick={this.props.coins_6_fn}>6</button>
-                <button id="coins_7_btn" className="btn" onClick={this.props.coins_7_fn}>7</button>
+                {/* <button id="coins_7_btn" className="btn" onClick={this.props.coins_7_fn}>7</button> */}
                 <button id="coins_8_btn" className="btn" onClick={this.props.coins_8_fn}>8</button>
                 <button id="coins_9_btn" className="btn" onClick={this.props.coins_9_fn}>9</button>
                 <button id="coins_10_btn" className="btn" onClick={this.props.coins_10_fn}>10</button>
