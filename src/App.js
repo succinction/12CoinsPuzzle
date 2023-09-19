@@ -16,12 +16,28 @@ import Controls from "./components/Controls";
 class App extends Component {
     constructor(props) {
         super(props);
-        if (window.innerWidth < 850) {
-            const viewportMetaTag = document.querySelector('meta[name="viewport"]');
-            if (viewportMetaTag) {
-                viewportMetaTag.setAttribute('content', 'width=device-width, initial-scale=0.45');
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        const landscapeQuery = window.matchMedia("(orientation: landscape)");
+        const mobileResponsiveness = () => {
+            if (window.innerWidth < 850) {
+                const viewportMetaTag = document.querySelector('meta[name="viewport"]');
+                if (viewportMetaTag) {
+                    const thislandscapeQuery = window.matchMedia("(orientation: landscape)");
+                    if (thislandscapeQuery.matches) {
+                        viewportMetaTag.setAttribute('content', 'width=device-width, initial-scale=0.65');
+                    } else {
+                        viewportMetaTag.setAttribute('content', 'width=device-width, initial-scale=0.43');
+                    }
+                }
             }
         }
+        landscapeQuery.addEventListener("change", function (event) {
+            mobileResponsiveness()
+        });
+        mobileResponsiveness()
+        window.addEventListener("resize", mobileResponsiveness);
+
         this.gameNumber = uuidv4();
         const initialNumberOfCoins = Number(localStorage.getItem("initialNumberOfCoins")) || 12;
         localStorage.setItem("initialNumberOfCoins", initialNumberOfCoins);
