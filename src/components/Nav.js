@@ -6,7 +6,7 @@ class Nav extends Component {
         super(props)
     }
     componentDidMount() {
-        const nav_id = ["#restart_btn", "#label_btn", "#cheat_btn", "#replace_btn", "#coins_3_btn", "#coins_6_btn", "#coins_9_btn", "#coins_10_btn", "#coins_11_btn", "#coins_12_btn", "#coins_13_btn", "#coins_14_btn", "#coins_15_btn"];
+        const nav_id = ["#restart_btn", "#label_btn", "#cheat_btn", "#replace_btn", "#coins_3_btn", "#coins_6_btn", "#coins_7_btn", "#coins_8_btn", "#coins_9_btn", "#coins_10_btn", "#coins_11_btn", "#coins_12_btn", "#coins_13_btn", "#coins_14_btn", "#coins_15_btn"];
         const tl = gsap.timeline({
             delay: .3,
             defaults: { 
@@ -28,6 +28,8 @@ class Nav extends Component {
                 <button id="replace_btn" className="btn" onClick={this.props.replace_fn}>Replace</button>
                 <button id="coins_3_btn" className="btn" onClick={this.props.coins_3_fn}>3</button>
                 <button id="coins_6_btn" className="btn" onClick={this.props.coins_6_fn}>6</button>
+                <button id="coins_7_btn" className="btn" onClick={this.props.coins_7_fn}>7</button>
+                <button id="coins_8_btn" className="btn" onClick={this.props.coins_8_fn}>8</button>
                 <button id="coins_9_btn" className="btn" onClick={this.props.coins_9_fn}>9</button>
                 <button id="coins_10_btn" className="btn" onClick={this.props.coins_10_fn}>10</button>
                 <button id="coins_11_btn" className="btn" onClick={this.props.coins_11_fn}>11</button>

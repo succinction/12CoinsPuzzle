@@ -22,7 +22,7 @@ class App extends Component {
         const initialLabels = Boolean(Number(localStorage.getItem("initialLabels")) == 1) || false;
         localStorage.setItem("initialLabels", initialLabels ? 1 : 0);
         const PIN = Number(localStorage.getItem("PIN")) || -1;
-        localStorage.setItem("PIN", PIN );
+        localStorage.setItem("PIN", PIN);
         this.showLabels = initialLabels;
         this.numberOfCoins = initialNumberOfCoins;
         this.lucky_number = Math.floor(Math.random() * initialNumberOfCoins);
@@ -36,7 +36,7 @@ class App extends Component {
             console.log("response_name", response_name)
             if (pin) {
                 this.pin = pin
-                localStorage.setItem("PIN", pin );
+                localStorage.setItem("PIN", pin);
             }
             let name = localStorage.getItem("name");
             if (name === null || name === "null" || name === "undefined" || name === undefined) {
@@ -109,7 +109,7 @@ class App extends Component {
         this.element.style.backgroundColor = "hsl(" + this.colr.h + "," + this.colr.s + "%," + this.colr.l + "%)";
     };
     end_color = () => {
-        gsap.to(this.colr, { duration: 6, h: 0, l: 100, onUpdate: this.applyColor });
+        gsap.to(this.colr, { duration: 6, h: 0, s: 0, l: 20, onUpdate: this.applyColor });
     };
     updateGameObject = () => {
         let measuretime = this._child_timer.get_time();
@@ -257,7 +257,7 @@ class App extends Component {
         let icons = ["#scale_icon0", "#scale_icon1", "#scale_icon2"];
         gsap.to(icons, { duration: .5, autoAlpha: 1, ease: Power3.easeOut });
         gsap.to("#cheat_btn", { duration: 2, color: "hsl(0, 0%, 100%)" });
-        gsap.to("#messenger", { duration: 2, color: "hsl(0, 0%, 0%)" });
+        gsap.to("#messenger", { duration: 2, color: "#90BCF0" }); /////
         this.setState({
             numberOfCoins: numbr,
             gameNumber: this.gameNumber,
@@ -407,6 +407,8 @@ class App extends Component {
     };
     coins_3 = () => { this.reset_game(3) };
     coins_6 = () => { this.reset_game(6) };
+    coins_7 = () => { this.reset_game(7) };
+    coins_8 = () => { this.reset_game(8) };
     coins_9 = () => { this.reset_game(9) };
     coins_10 = () => { this.reset_game(10) };
     coins_11 = () => { this.reset_game(11) };
@@ -415,7 +417,7 @@ class App extends Component {
     coins_14 = () => { this.reset_game(14) };
     coins_15 = () => { this.reset_game(15) };
     toggle_labels = () => {
-        localStorage.setItem("initialLabels", !this.state.labels ? 1 : 0 )
+        localStorage.setItem("initialLabels", !this.state.labels ? 1 : 0)
         this.setState({
             labels: !this.state.labels
         });
@@ -423,24 +425,24 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App" id="app_id">
-                <Bg />
-                <Scale balanced={this.state.balanced} />
-                <Timer ref={(child) => this._child_timer = child} />
-                <Instructions />
-                <Message msg={this.state.msg} className="messenger" id="messenger" num={this.state.numberOfCoins} />
-                <Nav className="nav" coins_3_fn={this.coins_3} coins_6_fn={this.coins_6} coins_9_fn={this.coins_9}
-                    coins_10_fn={this.coins_10} coins_11_fn={this.coins_11} coins_12_fn={this.coins_12}
-                    coins_13_fn={this.coins_13} coins_14_fn={this.coins_14} coins_15_fn={this.coins_15}
-                    replace_fn={this.replace_coins} reset_fn={this.reset_game} cheat_fn={this.show_cheat}
-                    label_fn={this.toggle_labels} />
-                <Coins ref={(child) => this._child = child} gameNumber={this.state.gameNumber} numberOfCoins={this.state.numberOfCoins}
-                    label={this.state.labels} balance_func={this.balance_scale} resetgame_fn={this.reset_game} />
-                <Controls lastGame={this.state.lastSavedGame} player_name={this.state.userName} pin={this.pin}
-                    backwards_fn={this.backward_replay} forwards_fn={this.forward_replay}
-                    load_fn={this.enterReplay} login_fn={this.getUserName} />
-                <Body user_name={this.state.userName} last_game={this.state.lastSavedGame} />
-            </div>
+                <div className="App" id="app_id">
+                    <Bg />
+                    <Scale balanced={this.state.balanced} />
+                    <Timer ref={(child) => this._child_timer = child} />
+                    <Instructions />
+                    <Message msg={this.state.msg} className="messenger" id="messenger" num={this.state.numberOfCoins} />
+                    <Nav className="nav" coins_3_fn={this.coins_3} coins_6_fn={this.coins_6} coins_9_fn={this.coins_9} coins_8_fn={this.coins_8}
+                        coins_10_fn={this.coins_10} coins_11_fn={this.coins_11} coins_12_fn={this.coins_12} coins_7_fn={this.coins_7}
+                        coins_13_fn={this.coins_13} coins_14_fn={this.coins_14} coins_15_fn={this.coins_15}
+                        replace_fn={this.replace_coins} reset_fn={this.reset_game} cheat_fn={this.show_cheat}
+                        label_fn={this.toggle_labels} />
+                    <Coins ref={(child) => this._child = child} gameNumber={this.state.gameNumber} numberOfCoins={this.state.numberOfCoins}
+                        label={this.state.labels} balance_func={this.balance_scale} resetgame_fn={this.reset_game} />
+                    <Controls lastGame={this.state.lastSavedGame} player_name={this.state.userName} pin={this.pin}
+                        backwards_fn={this.backward_replay} forwards_fn={this.forward_replay}
+                        load_fn={this.enterReplay} login_fn={this.getUserName} />
+                    <Body user_name={this.state.userName} last_game={this.state.lastSavedGame} />
+                </div>
         );
     }
 }
