@@ -86,7 +86,7 @@ function LeaderBoard({ data, refreshFn }) {
             <table>
                 <thead>
                     <tr>
-                        <th colSpan="4">Recent Games for {data.user || "-"}</th>
+                        <th colSpan="7">Recent Games for {data.user || "-"}</th>
                     </tr>
                     <tr>
                         <th>Game</th>

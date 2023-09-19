@@ -53,11 +53,11 @@ class Body extends Component {
         return (
             <div className="scratch">
                 {/* <Login /> */}{/*LOGIN NOT FULLY IMPLEMENTED*/}
-                <h2>Discover the False Coin in <strong> 3 </strong> Measurements</h2>
                 <Accordion buttonText={"LEADER BOARD"} ID="open_0" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
                     <LeaderBoard data={this.state.response_data} refreshFn={() => this.getLeaderBoard(this.props.user_name)} />
                 </Accordion>
 
+                <h2>Discover the False Coin in <strong> 3 </strong> Measurements</h2>
 
                 <h3>How to play:</h3>
                 <Accordion buttonText={'Quickstart How To Play Demo 1min video'} ID="open_5" actionID="accordionClicker4" groupID="bbb" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >

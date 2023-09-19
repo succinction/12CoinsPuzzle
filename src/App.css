@@ -66,13 +66,14 @@
     margin-right: auto;
     margin-left: auto;
     border-radius: 10px;
-    width: 100%;
+    width: 90%;
 }
 
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    
 }
 
 td,

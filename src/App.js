@@ -16,6 +16,12 @@ import Controls from "./components/Controls";
 class App extends Component {
     constructor(props) {
         super(props);
+        if (window.innerWidth < 850) {
+            const viewportMetaTag = document.querySelector('meta[name="viewport"]');
+            if (viewportMetaTag) {
+                viewportMetaTag.setAttribute('content', 'width=device-width, initial-scale=0.45');
+            }
+        }
         this.gameNumber = uuidv4();
         const initialNumberOfCoins = Number(localStorage.getItem("initialNumberOfCoins")) || 12;
         localStorage.setItem("initialNumberOfCoins", initialNumberOfCoins);
@@ -425,24 +431,24 @@ class App extends Component {
 
     render() {
         return (
-                <div className="App" id="app_id">
-                    <Bg />
-                    <Scale balanced={this.state.balanced} />
-                    <Timer ref={(child) => this._child_timer = child} />
-                    <Instructions />
-                    <Message msg={this.state.msg} className="messenger" id="messenger" num={this.state.numberOfCoins} />
-                    <Nav className="nav" coins_3_fn={this.coins_3} coins_6_fn={this.coins_6} coins_9_fn={this.coins_9} coins_8_fn={this.coins_8}
-                        coins_10_fn={this.coins_10} coins_11_fn={this.coins_11} coins_12_fn={this.coins_12} coins_7_fn={this.coins_7}
-                        coins_13_fn={this.coins_13} coins_14_fn={this.coins_14} coins_15_fn={this.coins_15}
-                        replace_fn={this.replace_coins} reset_fn={this.reset_game} cheat_fn={this.show_cheat}
-                        label_fn={this.toggle_labels} />
-                    <Coins ref={(child) => this._child = child} gameNumber={this.state.gameNumber} numberOfCoins={this.state.numberOfCoins}
-                        label={this.state.labels} balance_func={this.balance_scale} resetgame_fn={this.reset_game} />
-                    <Controls lastGame={this.state.lastSavedGame} player_name={this.state.userName} pin={this.pin}
-                        backwards_fn={this.backward_replay} forwards_fn={this.forward_replay}
-                        load_fn={this.enterReplay} login_fn={this.getUserName} />
-                    <Body user_name={this.state.userName} last_game={this.state.lastSavedGame} />
-                </div>
+            <div className="App" id="app_id">
+                <Bg />
+                <Scale balanced={this.state.balanced} />
+                <Timer ref={(child) => this._child_timer = child} />
+                <Instructions />
+                <Message msg={this.state.msg} className="messenger" id="messenger" num={this.state.numberOfCoins} />
+                <Nav className="nav" coins_3_fn={this.coins_3} coins_6_fn={this.coins_6} coins_9_fn={this.coins_9} coins_8_fn={this.coins_8}
+                    coins_10_fn={this.coins_10} coins_11_fn={this.coins_11} coins_12_fn={this.coins_12} coins_7_fn={this.coins_7}
+                    coins_13_fn={this.coins_13} coins_14_fn={this.coins_14} coins_15_fn={this.coins_15}
+                    replace_fn={this.replace_coins} reset_fn={this.reset_game} cheat_fn={this.show_cheat}
+                    label_fn={this.toggle_labels} />
+                <Coins ref={(child) => this._child = child} gameNumber={this.state.gameNumber} numberOfCoins={this.state.numberOfCoins}
+                    label={this.state.labels} balance_func={this.balance_scale} resetgame_fn={this.reset_game} />
+                <Controls lastGame={this.state.lastSavedGame} player_name={this.state.userName} pin={this.pin}
+                    backwards_fn={this.backward_replay} forwards_fn={this.forward_replay}
+                    load_fn={this.enterReplay} login_fn={this.getUserName} />
+                <Body user_name={this.state.userName} last_game={this.state.lastSavedGame} />
+            </div>
         );
     }
 }
