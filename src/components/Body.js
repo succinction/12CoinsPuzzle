@@ -60,7 +60,7 @@ class Body extends Component {
 
 
                 <h3>How to play:</h3>
-                <Accordion buttonText={'Quickstart How To Play video'} ID="open_5" actionID="accordionClicker4" groupID="bbb" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
+                <Accordion buttonText={'Quickstart How To Play Demo 1min video'} ID="open_5" actionID="accordionClicker4" groupID="bbb" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
                     <div className="video">
                         <p>
                             <iframe title="How to play" id="video1" width="640" height="360"
@@ -69,7 +69,7 @@ class Body extends Component {
                         </p>
                     </div>
                 </Accordion>
-                <Accordion buttonText={'How to play'} ID="open_2" actionID="accordionClicker2" groupID="AAA" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
+                <Accordion buttonText={'Instructions'} ID="open_2" actionID="accordionClicker2" groupID="AAA" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
 
                     Drag the coins onto the scale. <br />
                     To win, balance the false coin against the Ank or Feather after measuring only 3 times <br />

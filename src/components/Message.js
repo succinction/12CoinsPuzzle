@@ -8,7 +8,7 @@ export default function Message(props) {
             <img className="scale_icon" id="scale_icon0" src={scale_icon} alt="" />
             <img className="scale_icon" id="scale_icon1" src={scale_icon} alt="" />
             <img className="scale_icon" id="scale_icon2" src={scale_icon} alt="" />
-               :    {props.msg}
+               &nbsp;    {props.msg}
         </p>
     );
 }

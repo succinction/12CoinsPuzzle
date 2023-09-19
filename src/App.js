@@ -100,7 +100,7 @@ class App extends Component {
         };
         this.coin_location_array = this.reset_location_array();
         this.coin_locations = this.coin_location_array.toString();
-        this.colr = { h: 0, s: 50, l: 100 };
+        this.colr = { h: 0, s: 50, l: 80 };
         this.element = document.getElementsByTagName("body")[0];
         this.gameObject = this.renew_game_object();
     }

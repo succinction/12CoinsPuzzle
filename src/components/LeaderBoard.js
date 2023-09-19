@@ -1,5 +1,7 @@
 function LeaderBoard({ data, refreshFn }) {
-    const places = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th"];
+    const ranking = (num) => {
+        return num < 3 ? ["1st", "2nd", "3rd"][num] : (num + 1) + "th";
+    }
 
     return (
         <div className="leaders">
@@ -10,7 +12,7 @@ function LeaderBoard({ data, refreshFn }) {
                         <th colSpan="2">   <button id="refreshBtn" onClick={refreshFn} >Refresh</button> </th>
                     </tr>
                     <tr>
-                        <th colSpan="8">Your Stats (You are: {data.user || ""}) </th>
+                        <th colSpan="8"> Stats for {data.user || "-"} </th>
                     </tr>
                     <tr >
                         <th>Name</th>
@@ -39,7 +41,7 @@ function LeaderBoard({ data, refreshFn }) {
             <table>
                 <thead>
                     <tr>
-                        <th colSpan="9">Highest Ranked Players *</th>
+                        <th colSpan="9">Highest Ranked Players</th>
                     </tr>
                     <tr >
                         <th>Rank</th>
@@ -55,7 +57,7 @@ function LeaderBoard({ data, refreshFn }) {
                 </thead>
                 <tbody>
                     {!!data['bestPlayers'] && data.bestPlayers.length > 0 && data.bestPlayers.sort((a, b) => a.rank - b.rank).map((plyer, i) => <tr key={i}>
-                        <td>{places[plyer.rank] || "-"}</td>
+                        <td>{ranking(Number(plyer.rank)) || "-"}</td>
                         <td>{plyer.user || "-"}</td>
                         <td>{plyer.overall_score || "-"}</td>
                         <td>{plyer.score || "-"}</td>
@@ -84,7 +86,7 @@ function LeaderBoard({ data, refreshFn }) {
             <table>
                 <thead>
                     <tr>
-                        <th colSpan="4">Your Recent Games</th>
+                        <th colSpan="4">Recent Games for {data.user || "-"}</th>
                     </tr>
                     <tr>
                         <th>Game</th>
@@ -117,60 +119,6 @@ function LeaderBoard({ data, refreshFn }) {
                     }
                 </tbody>
             </table>
-
-
-
-            {/*<table>*/}
-            {/*<thead>*/}
-            {/*<tr>*/}
-            {/*<th colSpan="6">Top Scored Games This Month *</th>*/}
-            {/*</tr>*/}
-            {/*<tr>*/}
-            {/*<th>Time</th>*/}
-            {/*<th>Game Id</th>*/}
-            {/*<th>Player Name</th>*/}
-            {/*<th>Rank</th>*/}
-            {/*<th>Game Type</th>*/}
-            {/*<th>Date</th>*/}
-            {/*</tr>*/}
-            {/*</thead>*/}
-            {/*<tbody>*/}
-
-            {/*<tr>*/}
-            {/*<td>:50</td>*/}
-            {/*<td>Game_239</td>*/}
-            {/*<td>JBH</td>*/}
-            {/*<td>1</td>*/}
-            {/*<td>12</td>*/}
-            {/*<td>6/23/2017</td>*/}
-            {/*</tr>*/}
-            {/*<tr>*/}
-            {/*<td>1:33</td>*/}
-            {/*<td>Game_267</td>*/}
-            {/*<td>Chris</td>*/}
-            {/*<td>2</td>*/}
-            {/*<td>12</td>*/}
-            {/*<td>6/23/2017</td>*/}
-            {/*</tr>*/}
-            {/*<tr>*/}
-            {/*<td>1:40</td>*/}
-            {/*<td>Game_249</td>*/}
-            {/*<td>Mazda</td>*/}
-            {/*<td>3</td>*/}
-            {/*<td>12</td>*/}
-            {/*<td>6/23/2017</td>*/}
-            {/*</tr>*/}
-            {/*<tr>*/}
-            {/*<td>1:55</td>*/}
-            {/*<td>Game_210</td>*/}
-            {/*<td>JBH</td>*/}
-            {/*<td>1</td>*/}
-            {/*<td>12</td>*/}
-            {/*<td>6/23/2017</td>*/}
-            {/*</tr>*/}
-            {/*</tbody>*/}
-
-            {/*</table>*/}
         </div>
     );
 }

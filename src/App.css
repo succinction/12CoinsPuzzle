@@ -44,8 +44,7 @@
 
 
 .nav {
-    margin-left: 140px;
-
+    margin-left: 130px;
     z-index: 200;
 }
 
@@ -167,7 +166,6 @@ a:hover {
 .scale_icon {
     position: relative;
     padding-left: 6px;
-    top: 7px;
     width: 1.6em;
 
 }
