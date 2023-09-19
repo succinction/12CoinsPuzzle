@@ -25,9 +25,9 @@ class App extends Component {
                 if (viewportMetaTag) {
                     const thislandscapeQuery = window.matchMedia("(orientation: landscape)");
                     if (thislandscapeQuery.matches) {
-                        viewportMetaTag.setAttribute('content', 'width=device-width, initial-scale=0.65');
+                        viewportMetaTag.setAttribute('content', 'width=device-width, initial-scale=0.64');
                     } else {
-                        viewportMetaTag.setAttribute('content', 'width=device-width, initial-scale=0.43');
+                        viewportMetaTag.setAttribute('content', 'width=device-width, initial-scale=0.42');
                     }
                 }
             }
