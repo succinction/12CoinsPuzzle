@@ -18,7 +18,7 @@ class Controls extends Component {
                 PIN:
                 <input type="number" name="gameID" id="pin" placeholder={this.props.pin != -1 ? this.props.pin : ""}  />
                 {/* <input type="number" name="gameID" id="pin"   /> */}
-                <button id="load" className="btn" onClick={this.loadGame}> CHANGE </button>
+                <button id="load" className="btn" onClick={this.loadGame}> Submit </button>
                 <br />
 
                 Player: {this.props.player_name}  

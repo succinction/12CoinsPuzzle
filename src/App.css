@@ -41,9 +41,9 @@
     visibility: hidden;
 }
 
-
-
 .nav {
+    position: absolute;
+    top: 0;
     padding-top: 10px;
     margin-left: 120px;
     z-index: 200;
@@ -73,7 +73,7 @@ table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    
+    margin-bottom: 30px;
 }
 
 td,
@@ -88,26 +88,35 @@ tr:nth-child(even) {
 }
 
 .leaders {
-    /*display: block;*/
-    /*position: absolute;*/
     display: inline-block;
     width: 760px;
+    margin-top: 30px
+}
 
+input {
+    width: 160px;
+    margin: 5px;
+}
+
+#pin {
+    width: 60px;
+    margin: 5px;
 }
 
 #controls {
-    position: absolute;
-    padding-top: 25px;
+    padding-top: 40px;
     padding-bottom: 20px;
     padding-left: 50px;
-    top: 640px;
-
+    /* border: dotted red; */
+    z-index: 1300;
+    color: white;
 }
 
 .scratch {
     display: block;
     position: absolute;
     padding: 20px;
+    padding-top: 30px;
     top: 740px;
     color: #999;
 }
@@ -153,15 +162,15 @@ a:hover {
     left: 40px;
     padding: 10px;
     padding-top: 100px;
-    padding-bottom: 60px;
     width: 700px;
     color: #bbeeff;
     background-color: #3498db;
     border-radius: 14px;
+    font-size: 1rem;
 }
 
 .copyright {
-    font-size: 12px;
+    font-size: .96rem;
     color: #90BCF0;
 
 }
@@ -208,7 +217,6 @@ a:hover {
 }
 
 .messenger {
-
     font-size: 18px;
     top: 26px;
     left: 50px;
@@ -217,7 +225,7 @@ a:hover {
     width: 760px;
     display: block;
     color:#90BCF0;
-
+    font-size: 1rem;
 }
 
 .feather {
@@ -281,11 +289,13 @@ a:hover {
 }
 
 .bg {
-    height: 500px;
-    position: absolute;
+    height: 660px;
+    width: 800px;
+    /* position: absolute; */
     left: 0px;
     right: 55px;
     top: 0px;
+    /* border: dotted green 6px; */
 }
 
 .coin {
