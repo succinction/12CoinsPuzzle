@@ -32,9 +32,22 @@ class App extends Component {
                 }
             }
         }
-        landscapeQuery.addEventListener("change", function (event) {
-            mobileResponsiveness()
-        });
+
+        if (landscapeQuery.addEventListener) {
+            landscapeQuery.addEventListener("change", function (event) {
+                mobileResponsiveness()
+            });
+        } else if (landscapeQuery.addListener) {
+            // Safari uses addListener instead of addEventListener
+            landscapeQuery.addListener(function (event) {
+                mobileResponsiveness()
+            });
+        }
+
+        // landscapeQuery.addEventListener("change", function (event) {
+        //     mobileResponsiveness()
+        // });
+
         mobileResponsiveness()
         window.addEventListener("resize", mobileResponsiveness);
 
