@@ -22,13 +22,10 @@ class Nav extends Component {
     render() {
         return (
             <div className="nav">
-                <button id="restart_btn" className="btn" onClick={this.props.reset_fn}>Restart</button>
-                <button id="label_btn" className="btn" onClick={this.props.label_fn}>Labels</button>
-                <button id="cheat_btn" className="btn" onClick={this.props.cheat_fn}>Cheat</button>
-                <button id="replace_btn" className="btn" onClick={this.props.replace_fn}>Replace</button>
+                <button id="restart_btn" className="btn" onClick={this.props.reset_fn}>Restart with:</button>
                 <button id="coins_3_btn" className="btn" onClick={this.props.coins_3_fn}>3</button>
                 <button id="coins_6_btn" className="btn" onClick={this.props.coins_6_fn}>6</button>
-                {/* <button id="coins_7_btn" className="btn" onClick={this.props.coins_7_fn}>7</button> */}
+                <button id="coins_7_btn" className="btn" onClick={this.props.coins_7_fn}>7</button>
                 <button id="coins_8_btn" className="btn" onClick={this.props.coins_8_fn}>8</button>
                 <button id="coins_9_btn" className="btn" onClick={this.props.coins_9_fn}>9</button>
                 <button id="coins_10_btn" className="btn" onClick={this.props.coins_10_fn}>10</button>
@@ -37,6 +34,9 @@ class Nav extends Component {
                 <button id="coins_13_btn" className="btn" onClick={this.props.coins_13_fn}>13</button>
                 <button id="coins_14_btn" className="btn" onClick={this.props.coins_14_fn}>14</button>
                 <button id="coins_15_btn" className="btn" onClick={this.props.coins_15_fn}>15</button>
+                <button id="label_btn" className="btn" onClick={this.props.label_fn}>Labels</button>
+                <button id="cheat_btn" className="btn" onClick={this.props.cheat_fn}>Cheat</button>
+                {/* <button id="replace_btn" className="btn" onClick={this.props.replace_fn}>Replace</button> */}
             </div>
         );
     }
