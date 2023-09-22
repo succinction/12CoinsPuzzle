@@ -9,31 +9,47 @@ class Coins extends Component {
     constructor(props) {
         gsap.registerPlugin(Draggable);
         super(props);
-        this.get_images = () => {
-            return [
-                "coin_images/Arethusa390bcSyracusan.png",
-                "coin_images/Arethusa400bcSyracusan.png",
-                "coin_images/Arethusa405-400bcSyracusan.png",
-                "coin_images/Arethusa410-400bcSyracusan.png",
-                "coin_images/Arethusa400bcSyracusan.png",
-                "coin_images/Arethusa405-400bcSyracusan.png",
-                "coin_images/Arethusa410-400bcSyracusan.png",
-                "coin_images/Arethusa420bcSyracusan.png",
-                "coin_images/Arethusa440bcSyracusan.png",
-                "coin_images/Arethusa460bcSyracusan.png",
-                "coin_images/Arethusa470bcSyracusan.png",
-                "coin_images/Arethusa480bcSyracusan.png",
-                "coin_images/Arethusa490-485bcSyracusan.png",
-                "coin_images/Arethusa510-490bcSyracusan.png",
-                "coin_images/Arethusa480bcSyracusan.png",
-                "coin_images/Arethusa490-485bcSyracusan.png",
-                "coin_images/Arethusa510-490bcSyracusan.png",
-                "coin_images/HieroCopper.png"
-            ]
+        this.get_images = (numberOfCoins) => {
+            if (numberOfCoins <= 11) {
+                return [
+                    "coin_images/Arethusa390bcSyracusan.png",
+                    "coin_images/Arethusa400bcSyracusan.png",
+                    "coin_images/Arethusa405-400bcSyracusan.png",
+                    "coin_images/Arethusa410-400bcSyracusan.png",
+                    "coin_images/Arethusa420bcSyracusan.png",
+                    "coin_images/Arethusa440bcSyracusan.png",
+                    "coin_images/Arethusa460bcSyracusan.png",
+                    "coin_images/Arethusa470bcSyracusan.png",
+                    "coin_images/Arethusa490-485bcSyracusan.png",
+                    "coin_images/Arethusa480bcSyracusan.png",
+                    "coin_images/Arethusa510-490bcSyracusan.png"
+                ]
+            } else  {
+                return [
+                    "coin_images/RIC_0110-(vesp)1.png",
+                    "coin_images/RIC_0110-(vesp)2.png",
+                    "coin_images/RIC_0110-(vesp)1.png",
+                    "coin_images/RIC_0110-(vesp)2.png",
+                    "coin_images/RIC_0110-(vesp)1.png",
+                    "coin_images/RIC_0110-(vesp)2.png",
+                    "coin_images/RIC_0110-(vesp)1.png",
+                    "coin_images/RIC_0110-(vesp)2.png",
+                    "coin_images/RIC_0110-(vesp)1.png",
+                    "coin_images/RIC_0110-(vesp)2.png",
+                    "coin_images/RIC_0110-(vesp)1.png",
+                    "coin_images/RIC_0110-(vesp)2.png",
+                    "coin_images/RIC_0110-(vesp)1.png",
+                    "coin_images/RIC_0110-(vesp)2.png",
+                    "coin_images/RIC_0110-(vesp)1.png",
+                    "coin_images/RIC_0110-(vesp)2.png",
+                    "coin_images/RIC_0110-(vesp)1.png",
+                    "coin_images/RIC_0110-(vesp)2.png"
+                ]
+            }
         }
         this.coin_subset = [];
-        this.change_coin_images = () => {
-            let array = this.get_images();
+        this.change_coin_images = (numberOCoins) => {
+            let array = this.get_images(numberOCoins);
             let i = 0
                 , j = 0
                 , temp = null;
@@ -45,8 +61,7 @@ class Coins extends Component {
             }
             this.coin_subset = array;
         };
-        this.change_coin_images()
-        this.numberOCoins = this.props.numberOCoins
+        this.change_coin_images(this.props.numberOfCoins)
         this.state = {
             labels_on: this.props.label
         }
@@ -63,8 +78,9 @@ class Coins extends Component {
         }
         const tl = gsap.timeline({ paused: false });
         tl.to(this_coin, {
-            x: i =>{
-                return Math.round(coin_places[i])},
+            x: i => {
+                return Math.round(coin_places[i])
+            },
             y: 0,
             ease: Power3.easeOut,
             duration: 0.4,
@@ -89,9 +105,9 @@ class Coins extends Component {
     componentWillUpdate(nextProps, nextState) {
         //immediately before rendering when new props or state are being received
         if (this.props.numberOfCoins !== nextProps.numberOfCoins) {
-            this.change_coin_images()
+            this.change_coin_images(nextProps.numberOfCoins)
         } else if (this.props.gameNumber !== nextProps.gameNumber) {
-            this.change_coin_images()
+            this.change_coin_images(this.props.numberOfCoins)
         }
     }
 
@@ -134,8 +150,8 @@ class Coins extends Component {
     render() {
         return (
             <div className="coins">
-                <Feather id="feather" my_index={this.props.numberOfCoins} label={this.props.label}  />
-                <Ankh id="ankh" my_index={this.props.numberOfCoins + 1} label={this.props.label}  />
+                <Feather id="feather" my_index={this.props.numberOfCoins} label={this.props.label} />
+                <Ankh id="ankh" my_index={this.props.numberOfCoins + 1} label={this.props.label} />
                 { 0 < this.props.numberOfCoins &&
                     <Coin id={"coin" + 0} key={"coin" + 0} my_index={0} image_url={this.coin_subset[0]}
                         label={this.props.label} />}
