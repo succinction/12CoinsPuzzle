@@ -17,7 +17,6 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        ///////////////////////////////////////////////////////////////////////////////////////////
         const landscapeQuery = window.matchMedia("(orientation: landscape)");
         const mobileResponsiveness = () => {
             if (window.innerWidth < 850) {
@@ -44,10 +43,6 @@ class App extends Component {
             });
         }
 
-        // landscapeQuery.addEventListener("change", function (event) {
-        //     mobileResponsiveness()
-        // });
-
         mobileResponsiveness()
         window.addEventListener("resize", mobileResponsiveness);
 
@@ -68,7 +63,7 @@ class App extends Component {
         this.pin = PIN;
 
         this.getUserName = (response_name, pin) => {
-            console.log("response_name", response_name)
+            // console.log("response_name", response_name)
             if (pin) {
                 this.pin = pin
                 localStorage.setItem("PIN", pin);
@@ -237,7 +232,7 @@ class App extends Component {
         let cheated = (this.cheated) ? 'True' : 'False';
         let scoretime = (this.cheated) ? time + "-cheat" : time;
         let thescore = (this.cheated) ? 0 : score;
-        console.log('pin', this.pin)
+        // console.log('pin', this.pin)
         let dat = (
             {
                 user: this.state.userName,
@@ -261,7 +256,7 @@ class App extends Component {
             data: dat
         }, { headers }
         ).then((response) => {
-            console.log("response", response)
+            // console.log("response", response)
             change_name(response.data.user);
             // SavedGame(response.data.gameID, response.data.newGuest)
             SavedGame(this.state.lastSavedGame + 1, this.state.userName)

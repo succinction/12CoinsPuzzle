@@ -10,7 +10,7 @@ class Coins extends Component {
         gsap.registerPlugin(Draggable);
         super(props);
         this.get_images = (numberOfCoins) => {
-            if (numberOfCoins <= 11) {
+            if (numberOfCoins <= 11 && this.props.label === true) {
                 return [
                     "coin_images/Arethusa390bcSyracusan.png",
                     "coin_images/Arethusa400bcSyracusan.png",
