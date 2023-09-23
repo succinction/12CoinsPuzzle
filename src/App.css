@@ -84,7 +84,7 @@ th {
 }
 
 tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #444;
 }
 
 .leaders {
@@ -112,13 +112,17 @@ input {
     color: white;
 }
 
+.player-on-board {
+    color: lightgreen;
+}
+
 .scratch {
     display: block;
     position: absolute;
     padding: 20px;
     padding-top: 30px;
     top: 740px;
-    color: #999;
+    color: #bbb;
 }
 
 .scratch p {
@@ -214,17 +218,6 @@ a:hover {
     background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
     background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
     text-decoration: none;
-}
-
-.accordion-button {
-    border-radius: 6px;
-    /* width: 100%; */
-    text-align: left;
-    background-image: linear-gradient(to bottom, #aed4ed, #217eb9);
-}
-
-.accordion-button:hover {
-    background-image: linear-gradient(to bottom, #3cb0fd, #1e577c);
 }
 
 .messenger {

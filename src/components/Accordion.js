@@ -25,7 +25,7 @@ function Accordion({ ID, children, buttonText }) {
     }, [children])
     return (
         <>
-            <button id={myID + 'button'} onClick={activate} className="accordion-button" >{buttonText} &nbsp; &nbsp; &nbsp; V </button>
+            <button id={myID + 'button'} onClick={activate} className="btn" >{buttonText} &nbsp; &nbsp; &nbsp; V </button>
             <div id={myID} style={{ "overflow": "hidden" }} >
                 {children}
             </div>

@@ -13,9 +13,10 @@ class Controls extends Component {
     render() {
         return (
             <div id="controls">
-                CHANGE NAME to claim stats:
+                Assume Player Name to claim stats:
                 <input type="text" name="gameID" id="gameIdInput" placeholder={this.props.player_name} />
-                PIN:
+                {/* PIN */}
+                :
                 <input type="number" name="gameID" id="pin" placeholder={this.props.pin != -1 ? this.props.pin : ""}  />
                 {/* <input type="number" name="gameID" id="pin"   /> */}
                 <button id="load" className="btn" onClick={this.loadGame}> Submit </button>
