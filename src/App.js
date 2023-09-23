@@ -49,11 +49,11 @@ class App extends Component {
         this.gameNumber = uuidv4();
         const initialNumberOfCoins = Number(localStorage.getItem("initialNumberOfCoins")) || 9;
         localStorage.setItem("initialNumberOfCoins", initialNumberOfCoins);
-        const initialLabels = Boolean(Number(localStorage.getItem("initialLabels")) == 1) || false;
+        const initialLabels = Boolean(Number(localStorage.getItem("initialLabels")) == 1);
         localStorage.setItem("initialLabels", initialLabels ? 1 : 0);
         const PIN = Number(localStorage.getItem("PIN")) || -1;
         localStorage.setItem("PIN", PIN);
-        this.showLabels = initialLabels;
+        this.showLabels = !initialLabels;
         this.numberOfCoins = initialNumberOfCoins;
         this.lucky_number = Math.floor(Math.random() * initialNumberOfCoins);
         this.coin_weights = [Number(6), Number(5), Number(7)];
@@ -96,7 +96,7 @@ class App extends Component {
             replayObject: [],
             rePlayMode: false,
             lastSavedGame: 0,
-            labels: initialLabels,
+            labels: !initialLabels,
             msg: this.readout,
             numberOfCoins: this.numberOfCoins,
             balanced: 0
@@ -447,7 +447,7 @@ class App extends Component {
     coins_14 = () => { this.reset_game(14) };
     coins_15 = () => { this.reset_game(15) };
     toggle_labels = () => {
-        localStorage.setItem("initialLabels", !this.state.labels ? 1 : 0)
+        localStorage.setItem("initialLabels", !this.state.labels ? 0 : 1)
         this.setState({
             labels: !this.state.labels
         });
