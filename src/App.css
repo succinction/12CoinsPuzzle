@@ -216,6 +216,16 @@ a:hover {
     text-decoration: none;
 }
 
+.accordion-button {
+    width: 100%;
+    text-align: left;
+    background-image: linear-gradient(to bottom, #aed4ed, #8ca1ae);
+}
+
+.accordion-button:hover {
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+}
+
 .messenger {
     font-size: 18px;
     top: 26px;
@@ -224,7 +234,7 @@ a:hover {
     position: absolute;
     width: 760px;
     display: block;
-    color:#90BCF0;
+    color: #90BCF0;
     font-size: 1rem;
 }
 
