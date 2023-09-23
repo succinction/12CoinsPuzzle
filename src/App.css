@@ -217,13 +217,14 @@ a:hover {
 }
 
 .accordion-button {
-    width: 100%;
+    border-radius: 6px;
+    /* width: 100%; */
     text-align: left;
-    background-image: linear-gradient(to bottom, #aed4ed, #8ca1ae);
+    background-image: linear-gradient(to bottom, #aed4ed, #217eb9);
 }
 
 .accordion-button:hover {
-    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #1e577c);
 }
 
 .messenger {
