@@ -179,7 +179,7 @@ class App extends Component {
         //         replayObject: response_data
         //     });
         // };
-        // // LOAD GAME THROUGH AJAX
+        // // LOAD GAME
         // axios({
         //     method: 'get',
         //     headers: { 'Content-Type': 'application/json' },
@@ -230,7 +230,7 @@ class App extends Component {
             }
         };
         let cheated = (this.cheated) ? 'True' : 'False';
-        let scoretime = (this.cheated) ? time + "-cheat" : time;
+        let scoretime = (this.cheated) ? time + "-Tilted" : time;
         let thescore = (this.cheated) ? 0 : score;
         // console.log('pin', this.pin)
         let dat = (
@@ -287,7 +287,7 @@ class App extends Component {
         let icons = ["#scale_icon0", "#scale_icon1", "#scale_icon2"];
         gsap.to(icons, { duration: .5, autoAlpha: 1, ease: Power3.easeOut });
         gsap.to("#cheat_btn", { duration: 2, color: "hsl(0, 0%, 100%)" });
-        gsap.to("#messenger", { duration: 2, color: "#90BCF0" }); /////
+        gsap.to("#messenger", { duration: 2, color: "#90BCF0" });
         this.setState({
             numberOfCoins: numbr,
             gameNumber: this.gameNumber,
@@ -295,8 +295,6 @@ class App extends Component {
         });
         localStorage.setItem("initialNumberOfCoins", numbr)
         this.reset_coins(numbr);
-        // this.coin_location_array = this.reset_location_array(numbr);
-        // this.coin_locations = this.coin_location_array.toString();
         this.gameObject = this.renew_game_object();
     };
     replace_coins = () => {
@@ -385,10 +383,6 @@ class App extends Component {
                             repeat: 2
                         });
                         this.readout = 'You Win! ' + number_of_coins + ' Coins in ' + this.measurementsUsed + ' of 3 measurements! ' + time;
-                        // SAVE GAME PROCEDURE
-                        // IF USER IS ANONYMOUS
-                        // // ASK FOR A NAME TO ENTER ON THE LEADER BOARD
-                        // //
                         this.saveGameObject(this.measurementsUsed, time, 1, duration);
                     } else if (this.measurementsUsed < 4) {
                         gsap.to(this.colr, {
@@ -468,10 +462,10 @@ class App extends Component {
                     label_fn={this.toggle_labels} />
                 <Coins ref={(child) => this._child = child} gameNumber={this.state.gameNumber} numberOfCoins={this.state.numberOfCoins}
                     label={this.state.labels} balance_func={this.balance_scale} resetgame_fn={this.reset_game} />
-                <Controls lastGame={this.state.lastSavedGame} player_name={this.state.userName} pin={this.pin}
+                {/* <Controls lastGame={this.state.lastSavedGame} player_name={this.state.userName} pin={this.pin}
                     backwards_fn={this.backward_replay} forwards_fn={this.forward_replay}
-                    load_fn={this.enterReplay} login_fn={this.getUserName} />
-                <Body user_name={this.state.userName} last_game={this.state.lastSavedGame} />
+                    load_fn={this.enterReplay} login_fn={this.getUserName} /> */}
+                <Body user_name={this.state.userName} last_game={this.state.lastSavedGame} getUserNameFn={this.getUserName} />
             </div>
         );
     }

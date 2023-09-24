@@ -1,24 +1,24 @@
+
+
 function LeaderBoard({ data, refreshFn }) {
     const ranking = (num) => {
         return num < 3 ? ["1st", "2nd", "3rd"][num] : (num + 1) + "th";
     }
-
-    // if (!!data['bestPlayers'] && data.bestPlayers.length > 0 ) {
-    //     data.bestPlayers.forEach(obj => {
-    //         if (obj.user === data.user) {
-    //             obj.user = `<`
-
-    //         }
-    //     })
-    // }
-
     return (
         <div className="leaders">
+
+            {/* <div id="controls">
+                Assume Player Name to claim stats:
+                <input type="text" name="gameID" id="gameIdInput" placeholder={this.props.player_name} />
+
+                :
+                <input type="number" name="gameID" id="pin" placeholder={this.props.pin != -1 ? this.props.pin : ""}  />
+                <button id="load" className="btn" onClick={this.loadGame}> Submit </button>
+                <br />
+                Player: {this.props.player_name}  
+            </div> */}
             <table>
                 <thead>
-                    {/* <tr> */}
-                        {/* <th colSpan="7">LEADER BOARD  </th> */}
-                    {/* </tr> */}
                     <tr>
                         <th colSpan="7"> Stats for {data.user || "-"} </th>
                         <th colSpan="2">   <button id="refreshBtn" className="btn" onClick={refreshFn} >Refresh</button> </th>

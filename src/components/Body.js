@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LeaderBoard from "./LeaderBoard";
+import ClaimUserName from "./ClaimUserName";
 import Login from "./Login";
 import Accordion from "./Accordion";
 import axios from 'axios';
@@ -19,7 +20,6 @@ class Body extends Component {
                 this.getLeaderBoard(this.props.user_name)
             }
         }
-        // console.log("UPDATE getLeaderBoard?", this.props.user_name !== nextProps.user_name || this.props.last_game !== nextProps.last_game)
     }
 
 
@@ -54,6 +54,7 @@ class Body extends Component {
             <div className="scratch">
                 {/* <Login /> */}{/*LOGIN NOT FULLY IMPLEMENTED*/}
                 <Accordion buttonText={"LEADER BOARD"} ID="open_0" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
+                    <ClaimUserName getUserNameFn={this.props.getUserNameFn} player_name={this.props.user_name}  ></ClaimUserName>
                     <LeaderBoard data={this.state.response_data} refreshFn={() => this.getLeaderBoard(this.props.user_name)} />
                 </Accordion>
 

@@ -23,11 +23,6 @@ class Login extends Component {
             }
         })
     }
-    // componentWillReceiveProps(nextProps) {
-    // }
-    // componentDidMount() {
-    // }
-    //
     render() {
         return (
 
