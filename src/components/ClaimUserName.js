@@ -1,8 +1,8 @@
 function ClaimUserName({ player_name, pin, getUserNameFn }) {
     const updateUserName = () => {
-        let gameIDin = document.getElementById('userNameInput').value || this.props.player_name;
-        let PINin = document.getElementById('pin').value || pin;
-        getUserNameFn(gameIDin, PINin);
+        let gameIDin = document.getElementById('userNameInput').value || player_name;
+        // let PINin = document.getElementById('pin').value || pin;
+        getUserNameFn(gameIDin, -1);
     }
     return <div id="controls">
         Assume Player Name to claim stats:
