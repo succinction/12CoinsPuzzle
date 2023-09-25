@@ -63,9 +63,9 @@ class Body extends Component {
                 <h3>How to play:</h3>
                 <Accordion buttonText={'Quickstart How To Play Demo 1min video'} ID="open_5" actionID="accordionClicker4" groupID="bbb" groupFn={this.groupFn} controler={this.state.controler} callbackFn={this.callbackFn}  >
                     <div className="video">
-                        <p>
-                            <iframe title="How to play" id="video1" width="640" height="360"
-                                src="https://www.youtube.com/embed/ndF2_ypAejU?si=_9FcXokKW2X1B5BP"
+                    <p>
+                            <iframe title="How to play 12 Coin Game" id="video1" width="560" height="475"
+                                src="https://www.youtube.com/embed/cxe2RInI7iI?si=8nPewH1G6SpORuTo"
                                 allowFullScreen></iframe>
                         </p>
                     </div>
