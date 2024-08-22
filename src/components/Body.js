@@ -145,7 +145,7 @@ class Body extends Component {
               
                 <br />
                 <div className="bottom">
-                    <span className="copyright">Copyright 2006-2023   Joseph Howard   | <a
+                    <span className="copyright">Copyright 2006-2024   Joseph Howard   | <a
                         href="mailto:succinction@gmail.com">succinction@gmail.com</a>   | 3.0 |    built in react with gsap</span>
                 </div>
             </div>

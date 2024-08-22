@@ -46,7 +46,13 @@ class App extends Component {
         mobileResponsiveness()
         window.addEventListener("resize", mobileResponsiveness);
 
-        this.gameNumber = uuidv4();
+        this.getNewGameNumber = () => {
+            const event = new Date(Date.now());
+            let idPrefix = event.toISOString().substring(0, 10)
+            idPrefix = idPrefix.replaceAll("-","")
+            return idPrefix + uuidv4();
+        }
+        this.gameNumber = this.getNewGameNumber();
         const initialNumberOfCoins = Number(localStorage.getItem("initialNumberOfCoins")) || 9;
         localStorage.setItem("initialNumberOfCoins", initialNumberOfCoins);
         const initialLabels = Boolean(Number(localStorage.getItem("initialLabels")) == 1);
@@ -106,7 +112,7 @@ class App extends Component {
         };
         document.body.setAttribute('unselectable', 'on', 0);
         this.cheated = false;
-        this.gameSaved = 0;
+        this.gameSaved = "0";
         this.rePlayMode = false;
         this.renew_game_object = () => {
             let sign = (this.light_or_heavy > 1) ? "+" : "-";
@@ -205,9 +211,12 @@ class App extends Component {
     //////////////////////////////////////////////////////////////////////////////////////
     //  SAVE GAMEOBJECT
     saveGameObject = (used, time, score, dur) => {
+        console.log(">", this.gameSaved === this.gameObject.gameNumber ? "Block" : "Save")
+        console.log(this.gameSaved, "prev saved")
         if (this.gameSaved === this.gameObject.gameNumber) {
             return;
         }
+        console.log(this.gameObject.gameNumber, "saving")
         let change_name = (arg) => {
             // console.log(arg);
             if (this.userName !== arg) {
@@ -268,6 +277,11 @@ class App extends Component {
     };
 
     reset_game = (numbr) => {
+        if (this.measurementsUsed >= 3) {
+            const time = this._child_timer.get_time();
+            const duration = this._child_timer.get_seconds();
+            this.saveGameObject(this.measurementsUsed, time, 0, duration);
+        }
         if (typeof (numbr) !== "number") {
             numbr = this.state.numberOfCoins
         }
@@ -283,7 +297,7 @@ class App extends Component {
         this.readout = "Find the false coin within three measurements.";
         this.lucky_number = lucky_number_init;
         this.light_or_heavy = Math.floor(Math.random() * 2) + 1;
-        this.gameNumber = uuidv4();
+        this.gameNumber = this.getNewGameNumber();
         let icons = ["#scale_icon0", "#scale_icon1", "#scale_icon2"];
         gsap.to(icons, { duration: .5, autoAlpha: 1, ease: Power3.easeOut });
         gsap.to("#cheat_btn", { duration: 2, color: "hsl(0, 0%, 100%)" });
